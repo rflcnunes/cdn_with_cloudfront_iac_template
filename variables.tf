@@ -9,3 +9,14 @@ variable "aws_profile" {
   type        = string
   description = "AWS profile to use"
 }
+
+variable "environment" {
+  type        = string
+  description = "Environment where the resources will be created"
+}
+
+# S3 module variables
+variable "bucket_name" {
+  type        = string
+  description = "Name of the S3 bucket"
+}
