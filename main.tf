@@ -11,3 +11,9 @@ module "iam" {
   lambda_role_name = "example-cdn"
   environment      = var.environment
 }
+
+module "lambda" {
+  source = "./modules/lambda"
+
+  role_arn = module.iam.lambda_role_arn
+}
