@@ -25,7 +25,7 @@ resource "aws_api_gateway_integration" "ip_verifier_get_lambda" {
   http_method             = aws_api_gateway_method.ip_verifier_get.http_method
   type                    = "AWS_PROXY"
   integration_http_method = "POST"
-  uri                     = aws_lambda_function.ip_finder.invoke_arn
+  uri                     = var.lambda_invoke_arn
 
   depends_on = [
     aws_api_gateway_method.ip_verifier_get,
@@ -45,26 +45,6 @@ resource "aws_api_gateway_method_response" "ip_verifier_get_200" {
   depends_on = [
     aws_api_gateway_integration.ip_verifier_get_lambda,
   ]
-}
-
-resource "aws_api_gateway_stage" "example_cdn_api" {
-  rest_api_id   = aws_api_gateway_rest_api.example_cdn_api.id
-  deployment_id = aws_api_gateway_deployment.example_cdn_api.id
-  stage_name    = var.environment
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api_gateway_logs.arn
-    format = jsonencode({
-      requestId    = "$context.requestId",
-      ip           = "$context.identity.sourceIp",
-      request      = "$context.requestTime",
-      response     = "$context.responseTime",
-      status       = "$context.status",
-      method       = "$context.httpMethod",
-      resource     = "$context.resourcePath",
-      responseBody = "$context.integration.response.body"
-    })
-  }
 }
 
 resource "aws_api_gateway_method_settings" "ip_verifier_get" {

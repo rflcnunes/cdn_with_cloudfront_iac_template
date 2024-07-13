@@ -20,3 +20,9 @@ variable "bucket_name" {
   type        = string
   description = "Name of the S3 bucket"
 }
+
+# API Gateway module variables
+variable "api_name" {
+  type        = string
+  description = "Name of the API Gateway"
+}

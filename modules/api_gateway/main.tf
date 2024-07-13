@@ -14,6 +14,8 @@ resource "aws_lambda_permission" "apigw_lambda" {
 
 resource "aws_api_gateway_deployment" "example_cdn_api" {
   rest_api_id = aws_api_gateway_rest_api.example_cdn_api.id
+
+  depends_on = [aws_api_gateway_account.api_gw_account, aws_lambda_permission.apigw_lambda]
 }
 
 resource "aws_api_gateway_stage" "example_cdn_api" {
@@ -23,6 +25,7 @@ resource "aws_api_gateway_stage" "example_cdn_api" {
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gateway_logs.arn
+
     format = jsonencode({
       requestId    = "$context.requestId",
       ip           = "$context.identity.sourceIp",

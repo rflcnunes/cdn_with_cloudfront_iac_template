@@ -13,6 +13,11 @@ variable "lambda_arn" {
   type        = string
 }
 
+variable "lambda_invoke_arn" {
+  description = "The invoke ARN of the Lambda function"
+  type        = string
+}
+
 variable "environment" {
   description = "The environment (e.g. `dev`, `staging`, `prod`)"
   type        = string

@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_cors_configuration" "bucket_cors" {
-  bucket = aws_s3_bucket.bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.bucket
 
   cors_rule {
     allowed_headers = ["*"]
@@ -22,13 +22,13 @@ resource "aws_s3_bucket_cors_configuration" "bucket_cors" {
 }
 
 resource "aws_s3_bucket_acl" "bucket_acl" {
-  bucket = aws_s3_bucket.bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.bucket
 
   acl = "public-read"
 }
 
 resource "aws_s3_bucket_ownership_controls" "bucket_ownership_controls" {
-  bucket = aws_s3_bucket.bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.bucket
 
   rule {
     object_ownership = "ObjectWriter"
@@ -36,7 +36,7 @@ resource "aws_s3_bucket_ownership_controls" "bucket_ownership_controls" {
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket_public_access_block" {
-  bucket = aws_s3_bucket.bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.bucket
 
   block_public_acls       = false
   block_public_policy     = false
