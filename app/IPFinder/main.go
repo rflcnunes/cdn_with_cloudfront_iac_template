@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"net/http"
@@ -31,5 +32,6 @@ func handleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 }
 
 func main() {
+	fmt.Println("Starting IPFinder Lambda")
 	lambda.Start(handleRequest)
 }
