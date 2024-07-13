@@ -1,2 +1,6 @@
 .idea
 artifacts
+
+# CDN files
+app/cdn/node_modules
+app/cdn/dist

@@ -6,3 +6,11 @@ build-lambda:
 		GOOS=linux GOARCH=amd64 go build -o bootstrap main.go && \
 		zip -j ../../artifacts/lambdas/ip_finder.zip bootstrap && \
 		rm bootstrap
+
+# Build CDN
+build-cdn:
+	@echo "Building CDN"
+	@cd app/cdn && \
+		npm install && \
+		npm run build && \
+		cp -r dist ../../artifacts/cdn
