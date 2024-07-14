@@ -1,6 +1,10 @@
-.idea
+# Terraform paths
 artifacts
+/.terraform
 
-# CDN files
+# CDN paths
 app/cdn/node_modules
 app/cdn/dist
+
+# Other paths
+.idea
