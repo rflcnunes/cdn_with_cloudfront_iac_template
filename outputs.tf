@@ -6,3 +6,9 @@ output "bucket_information" {
     domain_name = module.s3.bucket_domain_name
   }
 }
+
+output "cdn_information" {
+  value = {
+    cdn_domain_name = module.cloudfront.cdn_domain_name
+  }
+}

@@ -1,8 +1,9 @@
 module "s3" {
   source = "./modules/s3"
 
-  bucket_name = var.bucket_name
-  environment = var.environment
+  bucket_name        = var.bucket_name
+  environment        = var.environment
+  cloudfront_oai_arn = module.cloudfront.cloudfront_oai_arn
 }
 
 module "iam" {
@@ -23,7 +24,7 @@ module "lambda" {
 }
 
 module "api_gateway" {
-  source               = "./modules/api_gateway"
+  source = "./modules/api_gateway"
 
   api_name             = var.api_name
   lambda_function_name = module.lambda.lambda_function_name
@@ -42,9 +43,4 @@ module "cloudfront" {
   bucket_name = module.s3.bucket_name
   bucket_arn  = module.s3.bucket_arn
   environment = var.environment
-
-  depends_on = [
-    module.api_gateway,
-    module.s3,
-  ]
 }
